@@ -64,6 +64,7 @@ const checkUsernameExists = (req, res, next) => {
   User.findBy({ username })
     .then(possibleUser => {
       if (possibleUser[0] !== undefined) {
+        req.body.foundUser = possibleUser
         next();
       } else {
         next({ status: 401, message: 'Invalid credentials'});
